@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Animated Sticker (No Overlay)</title>
+<style>
+  :root{
+    --scale: 1;
+    --x: 50%;    /* 0% left … 50% center … 100% right */
+    --y: 10px;   /* distance from top */
+    --speed: 2.6s; /* animation speed */
+  }
+  html, body { height: 100%; }
+  body{
+    margin:0; background:transparent; overflow:hidden;
+  }
+  .wrap{ position:fixed; inset:0; pointer-events:none; }
+  .sticker{
+    position:absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translateX(-50%) scale(var(--scale));
+    filter: drop-shadow(0 0 8px rgba(155,77,255,.9)) drop-shadow(0 0 16px rgba(57,240,208,.8));
+    animation: float var(--speed) ease-in-out infinite, tilt calc(var(--speed) * 2) ease-in-out infinite;
+    transform-origin: 50% 60%;
+  }
+  @keyframes float {
+    0%,100% { translate: 0 0; }
+    50%     { translate: 0 8px; }
+  }
+  @keyframes tilt {
+    0%,100% { rotate: 0deg; }
+    50%     { rotate: -2.5deg; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="sticker" src="sticker.png" alt="Ally Sticker" />
+  </div>
+</body>
+</html>
